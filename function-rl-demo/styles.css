@@ -142,10 +142,10 @@ h1 {
 
 .download-actions {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, minmax(118px, 1fr));
   gap: 6px;
   align-content: center;
-  min-width: 138px;
+  min-width: 248px;
 }
 
 .download-actions a {
@@ -161,7 +161,7 @@ h1 {
   line-height: 1.15;
 }
 
-.download-actions a:last-child {
+.download-actions a:not(:first-child) {
   background: #fff;
   color: var(--ink);
   border: 1px solid var(--line);
@@ -776,7 +776,7 @@ svg {
 
   .download-actions {
     grid-column: 1 / -1;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
   }
 }
 
