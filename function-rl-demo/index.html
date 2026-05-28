@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Best-Self Digital Twin</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">
+          <span>F</span>
+        </div>
+        <div>
+          <h1>Best-Self Digital Twin</h1>
+          <p>Counterfactual simulator for clinically plausible future selves from longitudinal biomarkers.</p>
+        </div>
+      </div>
+      <div class="header-stats" aria-label="Simulation metrics">
+        <div class="stat-tile">
+          <span>Futures</span>
+          <strong id="futureCount">0</strong>
+        </div>
+        <div class="stat-tile">
+          <span>Pareto set</span>
+          <strong id="paretoCount">0</strong>
+        </div>
+        <div class="stat-tile">
+          <span>Selected path</span>
+          <strong id="selectedPath">None</strong>
+        </div>
+        <div class="download-actions" aria-label="Download presentation">
+          <a href="./best-self-digital-twin.pptx" download>Download PPTX</a>
+          <a href="./best-self-digital-twin.pdf" download>Download PDF</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="left-rail">
+        <section class="panel member-panel">
+          <div class="panel-head">
+            <div>
+              <h2>Member Twin</h2>
+              <p>State is built from repeated lab panels.</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <label for="memberSelect">Synthetic member</label>
+            <select id="memberSelect"></select>
+
+            <div class="member-card">
+              <div class="avatar" id="avatar">M</div>
+              <div>
+                <strong id="memberName">Member</strong>
+                <span id="memberMeta">Synthetic profile</span>
+              </div>
+            </div>
+            <div class="tag-row" id="tagRow"></div>
+
+            <div class="signal-grid" id="signalGrid"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Objective</h2>
+              <p>Pick the future self to optimize for.</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="segmented" id="objectiveButtons" role="group" aria-label="Objective presets"></div>
+            <div class="constraint-row">
+              <label class="switch">
+                <input id="medsToggle" type="checkbox" checked />
+                <span></span>
+                Medication pathways allowed
+              </label>
+              <label class="switch">
+                <input id="lowBurdenToggle" type="checkbox" />
+                <span></span>
+                Keep burden low
+              </label>
+            </div>
+            <button class="primary-button" id="generateBtn">Generate 12,000 futures</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>What-If Composer</h2>
+              <p>Manual levers create a custom future.</p>
+            </div>
+          </div>
+          <div class="panel-body slider-stack" id="sliderStack"></div>
+        </section>
+      </aside>
+
+      <section class="main-stage">
+        <section class="panel hero-panel">
+          <div class="panel-head hero-head">
+            <div>
+              <h2>Future Self Space</h2>
+              <p>Each point is a simulated 180-day path. The frontier shows best outcome for effort.</p>
+            </div>
+            <div class="legend-row">
+              <span><i class="legend-dot baseline"></i>baseline</span>
+              <span><i class="legend-dot pareto"></i>frontier</span>
+              <span><i class="legend-dot selected"></i>selected</span>
+            </div>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="futureCanvas" width="1040" height="560" aria-label="Future self simulation cloud"></canvas>
+            <div class="canvas-tooltip" id="canvasTooltip" hidden></div>
+          </div>
+        </section>
+
+        <section class="stage-grid">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Biomarker Forecast</h2>
+                <p>Selected path versus no-change baseline with uncertainty.</p>
+              </div>
+              <select id="markerFocus" aria-label="Biomarker focus"></select>
+            </div>
+            <div class="panel-body chart-body">
+              <svg id="forecastChart" viewBox="0 0 760 300" role="img" aria-label="Biomarker forecast chart"></svg>
+              <div class="marker-pills" id="markerPills"></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <h2>Tradeoff Frontier</h2>
+                <p>The simulator does not choose one “right” future. It exposes options.</p>
+              </div>
+            </div>
+            <div class="panel-body frontier-body">
+              <div class="frontier-metrics" id="frontierMetrics"></div>
+              <div class="callout" id="frontierCallout"></div>
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <aside class="right-rail">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Choose A Future Self</h2>
+              <p>Top paths under the current objective.</p>
+            </div>
+          </div>
+          <div class="panel-body future-list" id="futureList"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Selected Simulation</h2>
+              <p>Expected changes after 180 days.</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="selected-score">
+              <div>
+                <span>Best-self score</span>
+                <strong id="selectedScore">--</strong>
+              </div>
+              <div>
+                <span>Burden</span>
+                <strong id="selectedBurden">--</strong>
+              </div>
+            </div>
+            <div class="delta-grid" id="deltaGrid"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Twin Reasoning</h2>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="reasoning" id="reasoningBox"></div>
+          </div>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
