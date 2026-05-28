@@ -1,7 +1,5 @@
 # Best-Self Digital Twin
 
-Interactive synthetic demo for a Head of AI conversation about Function-style longitudinal biomarker data.
-
 ## Core Thesis
 
 A lab chatbot explains what happened. A best-self digital twin lets a member rehearse what could happen next.
