@@ -25,8 +25,6 @@ http://127.0.0.1:4327/index.html
 - `function-rl-demo/best-self-digital-twin.pptx` - editable presentation deck
 - `function-rl-demo/best-self-digital-twin.pdf` - shareable PDF export
 
-## Pitch
 
 > A chatbot tells members what their labs mean. A digital twin lets them choose which future self they want to work toward, then learns from every retest whether that future was real.
 
-All biomarker data and forecasts in this demo are synthetic and not medical advice.
