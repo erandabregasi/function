@@ -1,6 +1,5 @@
 # Best-Self Digital Twin Demo
 
-Interactive demo for a Head of AI conversation about Function-style longitudinal biomarker data.
 
 The demo simulates 12,000 clinically plausible 180-day futures for a synthetic member, surfaces a Pareto frontier of outcome versus burden, and lets the presenter switch objectives such as lowest burden, no-med path, fast ApoB drop, metabolic reset, and maximum change.
 
