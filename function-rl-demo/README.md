@@ -1,38 +1,41 @@
 # Best-Self Digital Twin
 
-## Core Thesis
+An interactive AI demo that shows how longitudinal biomarker data could power a personalized “future self” simulator.
 
-A lab chatbot explains what happened. A best-self digital twin lets a member rehearse what could happen next.
+Instead of only explaining a member’s latest lab results, the demo simulates thousands of possible 180-day futures and helps the member choose the path that best matches their goals, constraints, and willingness to change.
 
-This demo simulates thousands of clinically plausible futures for a member, exposes the tradeoffs between outcome and effort, and lets the user choose the future self they want to optimize toward.
+## What It Shows
 
-## What The Demo Shows
+- 12,000 simulated future health paths for a synthetic member
+- A tradeoff map of biomarker improvement vs. intervention burden
+- Goal presets like “best overall,” “lowest burden,” “no-med path,” and “fast ApoB drop”
+- What-if controls for training, recovery, nutrition, metabolic support, and adherence
+- Forecasts for ApoB, fasting insulin, hs-CRP, ALT, and omega-3 index
+- A selected plan with expected biomarker changes and reasoning
 
-- 12,000 simulated 180-day futures for one synthetic member.
-- A Pareto frontier of biomarker improvement versus intervention burden.
-- Objective presets such as best overall, lowest burden, no-med path, fast ApoB drop, metabolic reset, and maximum change.
-- Manual what-if levers for lipid/ApoB pathway, metabolic support, training, recovery, nutrition, and adherence.
-- Biomarker forecasts with uncertainty for ApoB, fasting insulin, hs-CRP, ALT, and omega-3 index.
-- A selected future-self panel showing expected deltas and a model-facing explanation.
+## Why It Matters
 
-## AI 
+A chatbot can explain what a lab result means.
 
-This is a counterfactual digital twin plus multi-objective optimizer.
+A digital twin can answer a more powerful question:
 
-- State: longitudinal biomarker trajectory, including level, slope, volatility, and cross-marker coupling.
-- World model: forecasts biomarker movement under plausible intervention combinations.
-- Optimization: surfaces a Pareto frontier instead of pretending there is one universally correct path.
-- Feedback loop: every follow-up lab compares predicted versus actual movement and recalibrates the twin.
+**“Which version of my future self should I work toward?”**
 
-## Local Preview
+The defensible AI angle is that every follow-up lab creates feedback. The system can compare predicted vs. actual biomarker movement, then improve the model over time.
+
+## How It Works
+
+The demo combines:
+
+- Longitudinal biomarker trends
+- Counterfactual simulation
+- Multi-objective optimization
+- A Pareto frontier for outcome vs. effort
+- Retest-based model learning
+
+All data in this demo is synthetic and for product demonstration only.
+
+## Run Locally
 
 ```sh
 python3 -m http.server 4327 --bind 127.0.0.1
-```
-
-Then open:
-
-```text
-http://127.0.0.1:4327/index.html
-```
-
